@@ -15,36 +15,27 @@
  */
 package org.springframework.social.quickstart;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.Reference;
+import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Simple little @Controller that invokes Facebook and renders the result.
- * The injected {@link Facebook} reference is configured with the required authorization credentials for the current user behind the scenes.
- * @author Keith Donald
- */
+import javax.inject.Inject;
+
 @Controller
 public class HomeController {
 
-	private final Facebook facebook;
+	private final Yahoo yahoo;
 	
 	@Inject
-	public HomeController(Facebook facebook) {
-		this.facebook = facebook;
+	public HomeController(Yahoo yahoo) {
+		this.yahoo = yahoo;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		List<Reference> friends = facebook.friendOperations().getFriends();
-		model.addAttribute("friends", friends);
+		model.addAttribute("contacts", yahoo.contactsOperations().getContacts());
 		return "home";
 	}
 

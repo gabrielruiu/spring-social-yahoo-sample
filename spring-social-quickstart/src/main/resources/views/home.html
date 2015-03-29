@@ -7,9 +7,12 @@
 	<ul>
 		<li><a th:href="@{/signout}">Sign Out</a></li>
 	</ul>
-	<h3>Your Facebook Friends</h3>
+	<h3>Your Yahoo Addressbook Contacts</h3>
 	<ul>
-		<li th:each="friend : ${friends}"><img th:src="'http://graph.facebook.com/' + ${friend.id} + '/picture'" align="middle"/><span th:text="${friend.name}">name</span></li>
+		<li th:each="contact : ${contacts.contact}">
+			<span th:text="${contact.id}"/>
+			<span th:text="${contact.uri}"/>
+		</li>
 	</ul>	
 	</body>
 </html>

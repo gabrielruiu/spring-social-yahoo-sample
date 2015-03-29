@@ -29,7 +29,7 @@ dependencies {
 	compile "org.springframework.social:spring-social-config:$springSocialVersion"
 	compile "org.springframework.social:spring-social-core:$springSocialVersion"
 	compile "org.springframework.social:spring-social-web:$springSocialVersion"
-	compile "org.springframework.social:spring-social-facebook:$springSocialFacebookVersion"
+	compile "com.github.gabrielruiu:spring-social-yahoo:1.0.0.RELEASE"
 	compile "org.springframework.security:spring-security-crypto:$springSecurityVersion"
 
 	compile("org.thymeleaf:thymeleaf-spring4:$thymeleafVersion")

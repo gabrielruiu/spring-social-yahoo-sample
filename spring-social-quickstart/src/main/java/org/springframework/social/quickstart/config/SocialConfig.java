@@ -15,9 +15,8 @@
  */
 package org.springframework.social.quickstart.config;
 
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
+import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
+import com.github.gabrielruiu.springsocial.yahoo.connect.YahooConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -34,11 +33,12 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInController;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.quickstart.user.SecurityContext;
 import org.springframework.social.quickstart.user.SimpleConnectionSignUp;
 import org.springframework.social.quickstart.user.SimpleSignInAdapter;
+
+import javax.inject.Inject;
+import javax.sql.DataSource;
 
 /**
  * Spring Social Configuration.
@@ -57,7 +57,7 @@ public class SocialConfig implements SocialConfigurer {
 	
 	@Override
 	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
-		cfConfig.addConnectionFactory(new FacebookConnectionFactory(env.getProperty("facebook.appKey"), env.getProperty("facebook.appSecret")));
+		cfConfig.addConnectionFactory(new YahooConnectionFactory(env.getProperty("yahoo.consumerKey"), env.getProperty("yahoo.consumerSecret")));
 	}
 
 
@@ -82,8 +82,8 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public Facebook facebook(ConnectionRepository repository) {
-		Connection<Facebook> connection = repository.findPrimaryConnection(Facebook.class);
+	public Yahoo yahoo(ConnectionRepository repository) {
+		Connection<Yahoo> connection = repository.findPrimaryConnection(Yahoo.class);
 		return connection != null ? connection.getApi() : null;
 	}
 

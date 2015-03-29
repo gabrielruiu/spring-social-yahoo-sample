@@ -15,17 +15,17 @@
  */
 package org.springframework.social.quickstart.user;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Before a request is handled:
- * 1. sets the current User in the {@link SecurityContext} from a cookie, if present and the user is still connected to Facebook.
+ * 1. sets the current User in the {@link SecurityContext} from a cookie, if present and the user is still connected to Yahoo.
  * 2. requires that the user sign-in if he or she hasn't already.
  * @author Keith Donald
  */
@@ -69,7 +69,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 
 	private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {
 		if (SecurityContext.userSignedIn() && request.getServletPath().startsWith("/signout")) {
-			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId()).removeConnections("facebook");
+			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId()).removeConnections("yahoo");
 			userCookieGenerator.removeCookie(response);
 			SecurityContext.remove();			
 		}
@@ -86,7 +86,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 
 	private boolean userNotFound(String userId) {
 		// doesn't bother checking a local user database: simply checks if the userId is connected to Facebook
-		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(Facebook.class) != null;
+		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(Yahoo.class) != null;
 	}
 	
 }
