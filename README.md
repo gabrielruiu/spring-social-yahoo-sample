@@ -1,7 +1,3 @@
-Spring Social Samples
-=====================
-This repository contains sample projects illustrating usage of the Spring Social project.
-
-Samples include:
- * **spring-social-quickstart**, designed to get you up and running quickly in a Spring Framework 3.1 or > environment.
-
+Spring Social Quickstart
+========================
+Stripped down fork of the Spring Social Quickstart project to just showcase the Spring Social Yahoo extension.

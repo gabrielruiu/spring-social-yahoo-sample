@@ -15,11 +15,11 @@
  */
 package org.springframework.social.quickstart.user;
 
+import org.springframework.web.util.CookieGenerator;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.util.CookieGenerator;
 
 /**
  * Utility class for managing the quick_start user cookie that remembers the signed-in user.
