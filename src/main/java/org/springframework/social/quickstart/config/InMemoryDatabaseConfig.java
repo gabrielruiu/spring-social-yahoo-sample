@@ -16,10 +16,7 @@
 package org.springframework.social.quickstart.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -35,14 +32,12 @@ import javax.sql.DataSource;
  * @author Keith Donald
  */
 @Configuration
-@ComponentScan(basePackages = "org.springframework.social.quickstart", excludeFilters = { @Filter(Configuration.class) })
-@PropertySource("classpath:application.properties")
-public class MainConfig {
+public class InMemoryDatabaseConfig {
 
 	@Bean(destroyMethod = "shutdown")
 	public DataSource dataSource() {
 		EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
-		factory.setDatabaseName("spring-social-quickstart");
+		factory.setDatabaseName("spring-social-yahoo-sample");
 		factory.setDatabaseType(EmbeddedDatabaseType.H2);
 		factory.setDatabasePopulator(databasePopulator());
 		return factory.getDatabase();

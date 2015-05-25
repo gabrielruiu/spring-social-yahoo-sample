@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.quickstart;
+package org.springframework.social.quickstart.controller;
 
 import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.inject.Inject;
 
 @Controller
 public class HomeController {
 
 	private final Yahoo yahoo;
 	
-	@Inject
+	@Autowired
 	public HomeController(Yahoo yahoo) {
 		this.yahoo = yahoo;
 	}
