@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.quickstart.controller;
+package com.github.gabrielruiu.spring.yahoo.sample.controller;
 
 import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * @author Gabriel Mihai Ruiu (gabriel.ruiu@mail.com)
+ */
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
 	private final Yahoo yahoo;
@@ -33,10 +36,9 @@ public class HomeController {
 		this.yahoo = yahoo;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	@RequestMapping(method = RequestMethod.GET)
+	public String contacts(Model model) {
 		model.addAttribute("contacts", yahoo.contactsOperations().getContacts());
 		return "home";
 	}
-
 }
