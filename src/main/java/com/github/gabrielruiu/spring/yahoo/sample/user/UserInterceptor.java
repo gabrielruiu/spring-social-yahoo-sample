@@ -1,6 +1,8 @@
 package com.github.gabrielruiu.spring.yahoo.sample.user;
 
 import com.github.gabrielruiu.springsocial.yahoo.api.Yahoo;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 /**
  * Before a request is handled:
@@ -55,7 +58,8 @@ public final class UserInterceptor implements HandlerInterceptor {
             userCookieGenerator.removeCookie(response);
             return;
         }
-        SecurityContext.setCurrentUser(new User(userId, "", null));
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("user");
+        SecurityContext.setCurrentUser(new User(userId, "", Arrays.asList(grantedAuthority)));
     }
 
     private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {
